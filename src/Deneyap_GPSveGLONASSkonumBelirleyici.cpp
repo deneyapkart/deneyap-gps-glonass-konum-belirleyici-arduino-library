@@ -3,11 +3,10 @@
 @file         Deneyap_GPSveGLONASSkonumBelirleyici.cpp
 @mainpage     Deneyap GPS and GLONASS Locator Arduino library source file
 @maintainer   RFtek Electronics <techsupport@rftek.com.tr>
-@version      v1.0.0
-@date         July 18, 2022
+@version      v1.0.1
+@date         September 6, 2022
 @brief        Includes functions to control Deneyap GPS and GLONASS Locator 
               Arduino library
-
 Library includes:
 --> Configuration functions
 --> Data manipulation functions
@@ -117,10 +116,8 @@ uint8_t GPS::Read(String configMessage)
     delay(200);
     config++;
   }
-
   _dataPacket.command = (uint8_t)READ;
   _dataPacket.dataSize = 1;
-
   return I2C_ReadData(&_dataPacket);
 }
 */
@@ -187,10 +184,9 @@ uint8_t GPS::I2C_ReadData(Gps_DataPacket_TypeDef *dataPacket) {
         _i2cPort->read();
 
         for (uint8_t i = 0; i < dataSize; i++) {
-            Serial.print((char)_i2cPort->read());
-
-            //      if(gps.encode((char)_i2cPort->read()))
-            //        displayInfo();
+            //Serial.print((char)_i2cPort->read());
+            if(gps.encode((char)_i2cPort->read()))
+            displayInfo();
         }
     }
 

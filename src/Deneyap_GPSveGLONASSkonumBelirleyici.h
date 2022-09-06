@@ -2,8 +2,8 @@
 *****************************************************************************
 @file         Deneyap_GPSveGLONASSkonumBelirleyici.h
 @mainpage     Deneyap GPS and GLONASS Locator Arduino library header file
-@version      v1.0.0
-@date         July 18, 2022
+@version      v1.0.1
+@date         September 6, 2022
 @brief        This file contains all function prototypes and macros
               for Deneyap GPS and GLONASS Locator Arduino library
 *****************************************************************************

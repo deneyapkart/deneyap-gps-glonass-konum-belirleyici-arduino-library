@@ -37,6 +37,8 @@ This Arduino library allows you to use Deneyap GPS and GLONASS Locator with I2C 
 - `library.properties ` General library properties for the Arduino package manager
 
 ## Version History
+1.0.1 - bug fix
+
 1.0.0 - initial release
 
 ## :rocket:Hardware Connections
