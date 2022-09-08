@@ -19,7 +19,15 @@ begin			KEYWORD2
 isConnected		KEYWORD2
 getFwVersion	KEYWORD2
 setI2Caddress	KEYWORD2
-Read			KEYWORD2
+readGPS			KEYWORD2
+readDay			KEYWORD2
+readMonth		KEYWORD2
+readYear		KEYWORD2
+readHour		KEYWORD2
+readMinute		KEYWORD2
+readSecond		KEYWORD2
+readLocationLat	KEYWORD2
+readLocationLng	KEYWORD2
 sendConfigData	KEYWORD2
 
 #######################################

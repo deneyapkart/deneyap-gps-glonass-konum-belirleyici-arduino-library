@@ -2,15 +2,15 @@
 *****************************************************************************
 @file         Deneyap_GPSveGLONASSkonumBelirleyici.h
 @mainpage     Deneyap GPS and GLONASS Locator Arduino library header file
-@version      v1.0.1
-@date         September 6, 2022
+@version      v1.0.2
+@date         September 08, 2022
 @brief        This file contains all function prototypes and macros
               for Deneyap GPS and GLONASS Locator Arduino library
 *****************************************************************************
 */
 
-#ifndef __GPS_H
-#define __GPS_H
+#ifndef __Deneyap_GPSveGLONASSkonumBelirleyici_H
+#define __Deneyap_GPSveGLONASSkonumBelirleyici_H
 
 #include <Wire.h>
 #include <Arduino.h>
@@ -62,21 +62,21 @@
 #define NMEA_GBS_ONLY "$PMTK314,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0*35\r\n"
 
 typedef struct { // Data packet (protocol) created by master
-                 // for I2C data exchange process
+                // for I2C data exchange process
     uint8_t command : 3;
     uint8_t dataSize;
     uint8_t data[DATA_BUFFER_SIZE];
     char datarx[DATA_BUFFER_SIZE];
 } Gps_DataPacket_TypeDef;
 
-enum Gsm_packetCommands {   // Commands in data packet (protocol)
+enum Gsm_packetCommands { // Commands in data packet (protocol)
     READ = (uint8_t)0x00,
     CONFIG,
     GPS_CHANGE_ADDR,
     GPS_REQUEST_FW_VERSION,
 };
 
-enum stdNmeaMessages {  // Standard NMEA messages
+enum stdNmeaMessages { // Standard NMEA messages
     RMC = (uint8_t)0x00,
     GGA,
     GSV,
@@ -97,7 +97,15 @@ public:
     bool setI2Caddress(uint8_t newAddress);
 
     /* Functions for data manipulation */
-    bool Read(uint8_t nmeaDataType);
+    bool readGPS(uint8_t nmeaDataType);
+    uint8_t readDay();
+    uint8_t readMonth();
+    uint16_t readYear();
+    uint8_t readHour();
+    uint8_t readMinute();
+    uint8_t readSecond();
+    double readLocationLat();
+    double readLocationLng();
 
     /* Config functions */
     bool sendConfigData(String str);
@@ -116,7 +124,6 @@ private:
     uint8_t I2C_ReadData(Gps_DataPacket_TypeDef *dataPacket);
     uint16_t I2C_ReadFirmwareData16bit(Gps_DataPacket_TypeDef *dataPacket);
     bool I2C_SendDataPacket(Gps_DataPacket_TypeDef *dataPacket);
-    void displayInfo();
 };
 
-#endif /* __GPS_H */
+#endif /* __Deneyap_GPSveGLONASSkonumBelirleyici_H */

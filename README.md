@@ -8,8 +8,9 @@ Arduino library for Deneyap GPS and GLONASS Locator
 ## :mag_right:Specifications 
 - `Product ID` **M45**, **mpv1.0**
 - `MCU` STM8S003F3, Quectel L86
+- `Battery Housing`  CR1220
 - `Weight` 
-- `Module Dimension`
+- `Module Dimension` 25,4 mm x 38,1 mm
 - `I2C address` 0x2F, 0x54, 0x73, 0x74
 
 | Address |  | 
@@ -20,9 +21,13 @@ Arduino library for Deneyap GPS and GLONASS Locator
 | 0x74| address when ADR1 and ADR2 pads are shorted |
 
 ## :closed_book:Documentation
-Deneyap GPS and GLONASS Locator
+[Deneyap GPS and GLONASS Locator](https://docs.deneyapkart.org/en/content/contentDetail/deneyap-module-deneyap-gnss-m45)
 
-[Quectel L86](https://cdn.ozdisan.com/ETicaret_Dosya/456042_3622410.pdf)
+[Deneyap GPS and GLONASS Locator Schematic](https://cdn.deneyapkart.org/media/upload/userFormUpload/GEc26oFEFkPIzMT9PunlPEBJIslaoo2c.pdf)
+
+[Deneyap GPS and GLONASS Locator Mechanical Drawing](https://cdn.deneyapkart.org/media/upload/userFormUpload/Tyb470HrWmP4LJhrUGRGxiijpXCzBPN6.pdf)
+
+[Quectel L86 - datasheet](https://www.quectel.com/wp-content/uploads/pdfupload/Quectel_L86_GNSS_Specification_V1.3.pdf)
 
 [How to install a Arduino Library](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries)
 
@@ -37,6 +42,8 @@ This Arduino library allows you to use Deneyap GPS and GLONASS Locator with I2C 
 - `library.properties ` General library properties for the Arduino package manager
 
 ## Version History
+1.0.2 - add new functions
+
 1.0.1 - bug fix
 
 1.0.0 - initial release
@@ -55,10 +62,10 @@ This Arduino library allows you to use Deneyap GPS and GLONASS Locator with I2C 
 |RES  | Debug | no connection |
 |TX| Transmit pin | |
 |RX|  Receive pin | |
-|ADDET_N			||
-|RES_N				||
-|FORCE				||
-|1PPS				||
+|ADDET_N		||
+|RES_N			||
+|FORCE			||
+|1PPS			||
 
 ## :bookmark_tabs:License Information
 Please review the [LICENSE](https://github.com/deneyapkart/deneyap-gps-glonass-konum-belirleyici-arduino-library/blob/master/LICENSE) file for license information.

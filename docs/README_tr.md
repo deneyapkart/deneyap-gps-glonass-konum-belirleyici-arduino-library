@@ -7,8 +7,9 @@ Deneyap GPS ve GLONASS Konum Belirleyici için Arduino kütüphanesidir.
 ## :mag_right:Özellikler 
 - `Ürün ID` **M45**, **mpv1.0**
 - `MCU` STM8S003F3, Quectel L86
+- `Pil Yuvası` CR1220
 - `Ağırlık`
-- `Modul Boyutları` 
+- `Modul Boyutları` 25,4 mm x 38,1 mm
 - `I2C Adres` 0x2F, 0x54, 0x73, 0x74
 
 | Adres |  | 
@@ -19,11 +20,15 @@ Deneyap GPS ve GLONASS Konum Belirleyici için Arduino kütüphanesidir.
 | 0x74 | ADR1 ve ADR2 kısa devre yapıldığındaki adres |
 
 ## :closed_book:Dokümanlar
-Deneyap GPS ve GLONASS Konum Belirleyici
+[Deneyap GPS ve GLONASS Konum Belirleyici](https://docs.deneyapkart.org/tr/content/contentDetail/deneyap-module-deneyap-gnss-m45)
 
-[Quectel L86](https://cdn.ozdisan.com/ETicaret_Dosya/456042_3622410.pdf)
+[Deneyap GPS ve GLONASS Konum Belirleyici Şematik](https://cdn.deneyapkart.org/media/upload/userFormUpload/GEc26oFEFkPIzMT9PunlPEBJIslaoo2c.pdf)
 
-[Arduino Kütüphanesi Nasıl İndirilir](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries)
+[Deneyap GPS ve GLONASS Konum Belirleyici Teknik Resim](https://cdn.deneyapkart.org/media/upload/userFormUpload/Tyb470HrWmP4LJhrUGRGxiijpXCzBPN6.pdf)
+
+[Quectel L86 - datasheet](https://www.quectel.com/wp-content/uploads/pdfupload/Quectel_L86_GNSS_Specification_V1.3.pdf)
+
+[Arduino IDE'de Kütüphane Nasıl İndirilir](https://docs.arduino.cc/software/ide-v1/tutorials/installing-libraries)
 
 ## :pushpin:Deneyap GPS ve GLONASS Konum Belirleyici
 Bu Arduino kütüphanesi Deneyap GPS ve GLONASS Konum Belirleyiciyi I2C çevre birimi ile kullanılmasını sağlar. Arduino ile uyumlu, I2C çevre birimine sahip herhangi bir geliştirme kartı ile bu kütüphaneyi projelerinizde kullanabilirsiniz.
@@ -36,6 +41,10 @@ Bu Arduino kütüphanesi Deneyap GPS ve GLONASS Konum Belirleyiciyi I2C çevre b
 - `library.properties` Arduino yöneticisi için genel kütüphane özellikleri
 
 ## Sürüm Geçmişi
+1.0.2 - kütüphaneye yeni fonksiyonlar eklendi
+
+1.0.1 - hata giderildi
+
 1.0.0 - ilk sürüm
 
 ## :rocket:Donanım Bağlantıları
@@ -44,14 +53,14 @@ Bu Arduino kütüphanesi Deneyap GPS ve GLONASS Konum Belirleyiciyi I2C çevre b
 
 |GPS ve GLONASS Konum Belirleyici| Fonksiyon| Kart pinleri |
 | :---       		| :---     	 |   :---     |
-| 3.3V     			| Güç    		| 3.3V    |
+| 3.3V     			|3.3V Besleme Gerilimi| 3.3V    |
 | GND      			| Toprak 		|GND      |
-| SDA      			| I2C Data  	| SDA pini |
-| SCL      			| I2C Clock 	| SCL pini|
+| SDA      			|Çift Yönlü Veri Hattı| SDA pini |
+| SCL      			|Veri Hattı Zaman Senkronizasyon İşareti| SCL pini|
 |SWIM 				| Debug	 	| bağlantı yok 	|
 |RES  				| Debug 		| bağlantı yok 	|
-|TX					| Transmit pin 	| 				|
-|RX					|  Receive pin 	| 				|
+|TX					|UART Arayüzü Veri Çıkışı| 				|
+|RX					|UART Arayüzü Veri Girişi| 				|
 |ADDET_N			||
 |RES_N				||
 |FORCE				||

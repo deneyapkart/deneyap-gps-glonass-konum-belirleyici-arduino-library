@@ -3,10 +3,11 @@
 @file         Deneyap_GPSveGLONASSkonumBelirleyici.cpp
 @mainpage     Deneyap GPS and GLONASS Locator Arduino library source file
 @maintainer   RFtek Electronics <techsupport@rftek.com.tr>
-@version      v1.0.1
-@date         September 6, 2022
-@brief        Includes functions to control Deneyap GPS and GLONASS Locator 
+@version      v1.0.2
+@date         September 08, 2022
+@brief        Includes functions to control Deneyap GPS and GLONASS Locator
               Arduino library
+
 Library includes:
 --> Configuration functions
 --> Data manipulation functions
@@ -55,6 +56,7 @@ bool GPS::isConnected() {
         return true;
     return false;
 }
+
 /**
  * @brief  Requests firmware version of the device
  * @param  None
@@ -78,13 +80,10 @@ bool GPS::setI2Caddress(uint8_t newAddress) {
 
     bool status = I2C_SendDataPacket(&_dataPacket);
 
-    if (status == true)
-    {
+    if (status == true) {
         _i2cAddress = newAddress;
         return true;
-    }
-    else
-    {
+    } else {
         return false;
     }
 }
@@ -116,8 +115,10 @@ uint8_t GPS::Read(String configMessage)
     delay(200);
     config++;
   }
+
   _dataPacket.command = (uint8_t)READ;
   _dataPacket.dataSize = 1;
+
   return I2C_ReadData(&_dataPacket);
 }
 */
@@ -127,7 +128,7 @@ uint8_t GPS::Read(String configMessage)
  * @param
  * @retval
  */
-bool GPS::Read(uint8_t nmeaDataType) {
+bool GPS::readGPS(uint8_t nmeaDataType) {
     _dataPacket.command = (uint8_t)READ;
     _dataPacket.dataSize = 1;
     _dataPacket.data[0] = nmeaDataType;
@@ -148,14 +149,13 @@ bool GPS::sendConfigData(String str) {
     _dataPacket.command = (uint8_t)CONFIG;
     _dataPacket.dataSize = str.length();
 
-    for (uint8_t txCounter = 0; txCounter < _dataPacket.dataSize; txCounter++) {
+    for (uint8_t txCounter = 0; txCounter < _dataPacket.dataSize; txCounter++)
+    {
         _dataPacket.data[txCounter] = pqtxt[txCounter];
     }
 
     return I2C_ReadData(&_dataPacket);
 }
-
-/* I2C Data Transaction Funstions --------------------------------------------*/
 
 /**
  * @brief  Reads 8bit data from I2C interface
@@ -184,74 +184,98 @@ uint8_t GPS::I2C_ReadData(Gps_DataPacket_TypeDef *dataPacket) {
         _i2cPort->read();
 
         for (uint8_t i = 0; i < dataSize; i++) {
-            //Serial.print((char)_i2cPort->read());
-            if(gps.encode((char)_i2cPort->read()))
-            displayInfo();
+            gps.encode((char)_i2cPort->read());
         }
     }
-
     return 1;
 }
 
 /**
- * @brief
- * @param
- * @retval
+ * @brief	read day data
+ * @param	none
+ * @retval	day data
  */
-void GPS::displayInfo() {
-    Serial.print(F("Location: "));
-    if (gps.location.isValid()) {
-        Serial.print(gps.location.lat(), 6);
-        Serial.print(F(","));
-        Serial.print(gps.location.lng(), 6);
-    }
-    else {
-        Serial.print(F("INVALID"));
-    }
+uint8_t GPS::readDay() {
+    if (gps.date.isValid());
+    return gps.date.day();
+}
 
-    Serial.print(F("  Date/Time: "));
-    if (gps.date.isValid()) {
-        Serial.print(gps.date.month());
-        Serial.print(F("/"));
-        Serial.print(gps.date.day());
-        Serial.print(F("/"));
-        Serial.print(gps.date.year());
-    }
-    else {
-        Serial.print(F("INVALID"));
-    }
+/**
+ * @brief	read month data
+ * @param	none
+ * @retval	month data
+ */
+uint8_t GPS::readMonth() {
+    if (gps.date.isValid());
+    return gps.date.month();
+}
 
-    Serial.print(F(" "));
-    if (gps.time.isValid()) {
-        if (gps.time.hour() < 10)
-            Serial.print(F("0"));
-        Serial.print(gps.time.hour());
-        Serial.print(F(":"));
-        if (gps.time.minute() < 10)
-            Serial.print(F("0"));
-        Serial.print(gps.time.minute());
-        Serial.print(F(":"));
-        if (gps.time.second() < 10)
-            Serial.print(F("0"));
-        Serial.print(gps.time.second());
-        Serial.print(F("."));
-        if (gps.time.centisecond() < 10)
-            Serial.print(F("0"));
-        Serial.print(gps.time.centisecond());
-    }
-    else {
-        Serial.print(F("INVALID"));
-    }
+/**
+ * @brief	read year data
+ * @param	none
+ * @retval	year data
+ */
+uint16_t GPS::readYear() {
+    if (gps.date.isValid());
+    return gps.date.year();
+}
 
-    Serial.println();
+/**
+ * @brief	read hour data
+ * @param	none
+ * @retval	hour data
+ */
+uint8_t GPS::readHour() {
+    if (gps.time.hour() < 10);
+    return gps.time.hour();
+}
+
+/**
+ * @brief	read minute data
+ * @param	none
+ * @retval	minute data
+ */
+uint8_t GPS::readMinute() {
+    if (gps.time.minute() < 10);
+    return gps.time.minute();
+}
+
+/**
+ * @brief	read second data
+ * @param	none
+ * @retval	seconds data
+ */
+uint8_t GPS::readSecond() {
+    if (gps.time.second() < 10);
+    return gps.time.second();
+}
+
+/**
+ * @brief	reads location lng
+ * @param	none
+ * @retval	location lat data
+ */
+double GPS::readLocationLat() {
+    if (gps.location.isValid());
+    return gps.location.lat();
+}
+
+/**
+ * @brief	reads location lng
+ * @param	none
+ * @retval	locatoion lng data
+ */
+double GPS::readLocationLng() {
+    if (gps.location.isValid());
+    return gps.location.lng();
 }
 
 /* I2C Data Transaction Funstions --------------------------------------------*/
 
 /**
- * @brief
- * @param
- * @retval
+ * @brief  Reads 8bit data from I2C interface
+ * @param  dataPacket: includes protocol to request data
+ * @retval I2C 8bit data
  */
 uint8_t GPS::I2C_ReadData8bit(Gps_DataPacket_TypeDef *dataPacket) {
     _i2cPort->beginTransmission(_i2cAddress);
@@ -294,10 +318,7 @@ uint16_t GPS::I2C_ReadFirmwareData16bit(Gps_DataPacket_TypeDef *dataPacket) {
     if (_i2cPort->requestFrom(_i2cAddress, static_cast<uint8_t>(2)) != 0) {
         i2cData2 = _i2cPort->read();
         i2cData1 = _i2cPort->read();
-        Serial.print("v");
-        Serial.print(i2cData1);
-        Serial.print(".");
-        Serial.print(i2cData2);
+        Serial.print("v"); Serial.print(i2cData1); Serial.print("."); Serial.print(i2cData2);
     }
     return 0;
 }
