@@ -1,7 +1,5 @@
 # Deneyap GPS ve GLONASS Konum Belirleyici Arduino Kütüphanesi
 
-***** Fotoğraf eklenecek ****
-
 Deneyap GPS ve GLONASS Konum Belirleyici için Arduino kütüphanesidir.
 
 ## :mag_right:Özellikler 
